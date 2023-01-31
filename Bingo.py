@@ -55,3 +55,49 @@ def winner_time(num_players):
  winner_time(10000)
  
  
+    
+    
+    
+
+    ################ MEAN AND STANDARD DEVIATION CALCULUS#######################################
+
+mean_winner = []
+
+atpc = []
+
+for i in range(191):
+    countery = 0
+    print(i)
+    for y in range(500):
+        countery += winner_time(i+1)
+    countery = countery/500
+        
+    atpc.append(countery)
+
+
+import statistics as st
+
+stdv_list = []
+
+for i in range(191):
+    countery = 0
+    all_means = []
+    print(i)
+    for y in range(500):
+        all_means.append(winner_time(i+1))
+    stdv_list.append(st.stdev(all_means))
+    countery += 1
+    
+import pandas as pd  
+
+
+df = pd.DataFrame(list(zip(atpc,stdv_list)), columns= ["Mean","Stdv"])        
+        
+        
+df.index = np.arange(1,len(df)+1 )
+
+df.to_excel("bingo.xlsx")
+
+
+    
+    
